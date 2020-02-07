@@ -6,6 +6,8 @@
 
 const outputArea = document.getElementById("output-area");
 
+let deck = [];
+
 const cards = [
   // Spades
   {
@@ -277,8 +279,6 @@ const cards = [
   }
 ];
 
-let deck = [];
-
 function shuffleDeck() {
   let tmpDeck = cards;
 
@@ -294,24 +294,30 @@ shuffleDeck();
 /* deck.forEach(Element => {
     outputArea.innerHTML += deck.card
 }); */
-let firstCard = deck.shift();
+// let firstCard = deck.shift();
+
 function drawCard() {
   let firstCard = deck.shift();
-  return firstCard;
+
+  console.log(firstCard);
+  firstCard.map((card, index) => {
+    return (outputArea.innerHTML += card.card);
+  });
 }
 
-firstCard.map((card, index) => {
-  return outputArea.innerHTML += card.card
-})
-
-
-drawCard();
-
+document.getElementById("new-game-button").addEventListener("click", () => {
+  let x = 0;
+  let intervalID = setInterval(function() {
+    drawCard();
+    if (++x === 2) {
+      window.clearInterval(intervalID);
+    }
+  }, 500);
+});
 
 // firstCard.forEach(Element => {
 //   outputArea.innerHTML += firstCard;
 // });
 
-console.log(firstCard);
 //This shows the card
 //document.getElementById("output-area").innerHTML = queenOfSpades.card, queenOfSpades.card;
