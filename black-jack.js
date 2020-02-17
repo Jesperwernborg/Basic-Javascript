@@ -353,9 +353,9 @@ calculateHand = cards => {
     return score;
   });
   console.log(score);
+
+  return score
 };
 
-calculateHand(player);
-
 //spelar ingen roll, används inte ändå, ska vara null enligt uppgiften
-outputArea.innerHTML = showHand(dealer, null) + "<br>" + showHand(player, null);
+outputArea.innerHTML = showHand(dealer, calculateHand(dealer)) + "<br>" + showHand(player, calculateHand(player));
