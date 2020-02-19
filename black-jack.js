@@ -318,9 +318,10 @@ clearTable = () => {
 dealInitialCards = () => {
 
     drawCard(dealer);
+    drawCard(player);
+    drawCard(player);
     drawCard(dealer);
-    drawCard(player);
-    drawCard(player);
+
     showHands();
 }
 
@@ -330,9 +331,12 @@ calculateHand = cards => {
     let score = 0;
 
     let value = cards.find(card => card.value === 1) !== undefined;
-
+    console.log(cards, "before loop");
+    
     cards.forEach(card => {
         score += card.value;
+        console.log(score, "in loop");
+        
         return score;
     });
 
@@ -357,9 +361,11 @@ document.getElementById("new-game-button").addEventListener('click', function ()
 
 dealAnotherCard = (hand) => {
     drawCard(hand);
+    outputArea.innerHTML = showHand(dealer, calculateHand(dealer)) + "<br>" + showHand(player, calculateHand(player));
 
+    if (calculateHand(player) > 21) alert("You lost");
 }
 
 document.getElementById("hit-button").addEventListener('click', function () {
-    dealAnotherCard();
+    dealAnotherCard(player);
 }, false);
