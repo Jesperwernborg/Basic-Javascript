@@ -28,7 +28,7 @@ const loadData = async (query) => {
         const { apartments } = result.data;
         
         apartments.map(apartment => {
-            query == undefined || query == apartment.city &&
+            (query == undefined || query == apartment.city) &&
                 (apart.innerHTML += renderListing(apartment))
         })
     }
