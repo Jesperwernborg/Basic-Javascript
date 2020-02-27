@@ -23,15 +23,14 @@ const loadData = async (query) => {
 
     try {
         // Call the API to fetch data
-        const result = axios.get('https://api.myjson.com/bins/2sadq?pretty=1');
-
-        const { data: apartment } = await result;
-
-        for (var i = 0; i < apartment.apartments.length; i++) {
-            if (query == undefined || query == apartment.apartments[i].city)
-                apart.innerHTML += renderListing(apartment.apartments[i]);
-        }
-
+        const result = await axios.get('https://api.myjson.com/bins/2sadq?pretty=1');
+        
+        const { apartments } = result.data;
+        
+        apartments.map(apartment => {
+            (query == undefined || query == apartment.city) &&
+                (apart.innerHTML += renderListing(apartment))
+        })
     }
     catch (err) {
         price.innerHTML = `Couldn't reach the API.`
