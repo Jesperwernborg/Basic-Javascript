@@ -11,34 +11,44 @@ const scoreboardContent = document.getElementById('scoreboard-content');
 
 
 clearTable = () => {
-    div.innerHTML = "";
+    playerContent.innerHTML = "";
+    dealerContent.innerHTML = "";
+    resultContent.innerHTML = "";
 }
-disableButtons = (start, draw, stay) => {
+
+
+
+ disableButtons = (start, draw, stay) => {
+
     start = false;
     draw = true;
     stay = true;
 
-    if (start.value != false) {
-        start.disable = true;
+    
+     if (start != false) {
+        startButton.disabled = true;
     } else {
-        start.disable = false;
+        startButton.disabled = false;
     }
-    if (draw.value != true) {
-        draw.disable = false;
+     if (draw != true) {
+        drawButton.disabled = false;
     } else {
-        draw.disable = true;
-    }
-    if (stay.value != true) {
-        stay.disable = false;
+        drawButton.disabled = true;
+    } 
+    if (stay != true) {
+        stayButton.disabled = false;
     } else {
-        stay.disable = true;
+        stayButton.disabled = true;
     }
 }
 
-startButton.addEventListener('click', clearTable, disableButtons(true, false, false), console.log('start button clicked'));
 
-drawButton.addEventListener('click', console.log('Draw button clicked'));
+startButton.addEventListener('click', clearTable(), disableButtons(start = true, draw = false, stay = false),console.log('start button clicked'));
+console.log(start, draw, stay)
 
-stayButton.addEventListener('click', disableButtons(false, true, true), console.log('Stay button clicked'));
 
-clearButton.addEventListener('click', console.log('Clear button clicked'));
+drawButton.addEventListener('click',console.log('draw button clicked'));
+
+stayButton.addEventListener('click', disableButtons(),console.log('stay button clicked'));
+
+clearButton.addEventListener('click',console.log('clear button clicked'));
